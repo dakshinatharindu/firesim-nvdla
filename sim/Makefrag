@@ -120,6 +120,8 @@ build_dir      := $(fpga_work_dir)/build
 verif_dir      := $(fpga_work_dir)/verif
 fpga_v         := $(fpga_work_dir)/design/cl_firesim_generated.sv
 ila_work_dir   := $(fpga_work_dir)/design/ila_files/
+nvdla_vsrc_dir := $(firesim_base_dir)/../target-design/firechip/nvidia-dla-blocks/vsrc/large
+nvdla_work_dir := $(fpga_work_dir)/design/nvdla_large
 
 $(fpga_work_dir)/stamp: $(shell find $(board_dir)/cl_firesim -name '*')
 	mkdir -p $(@D)
@@ -137,9 +139,14 @@ $(ila_work_dir): $(verilog) $(fpga_work_dir)/stamp
 	sed -i "s/\$$random/64'b0/g" $(fpga_work_dir)/design/ila_files/*
 	sed -i 's/fatal/fatal(0, "")/g' $(fpga_work_dir)/design/ila_files/*
 
+.PHONY: $(nvdla_work_dir)
+$(nvdla_work_dir): $(fpga_work_dir)/stamp
+	mkdir -p $@
+	cp -rf $(nvdla_vsrc_dir)/* $@
+
 # Goes as far as setting up the build directory without running the cad job
 # Used by the manager before passing a build to a remote machine
-replace-rtl: $(fpga_v) $(ila_work_dir)
+replace-rtl: $(fpga_v) $(ila_work_dir) $(nvdla_work_dir)
 .PHONY: replace-rtl
 
 $(firesim_base_dir)/scripts/checkpoints/$(target_sim_tuple): $(fpga_work_dir)/stamp

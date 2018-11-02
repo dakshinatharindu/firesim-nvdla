@@ -8,6 +8,7 @@ import boom.system.{BoomSubsystem, BoomSubsystemModule}
 import icenet._
 import testchipip._
 import sifive.blocks.devices.uart._
+import nvidia.blocks.dla._
 import java.io.File
 
 
@@ -32,6 +33,7 @@ class FireSim(implicit p: Parameters) extends RocketSubsystem
     with HasPeripheryUART
     with HasPeripheryIceNIC
     with HasPeripheryBlockDevice
+    with HasPeripheryNVDLA
 {
   override lazy val module = new FireSimModuleImp(this)
 }
@@ -56,6 +58,7 @@ class FireSimNoNIC(implicit p: Parameters) extends RocketSubsystem
     with HasPeripherySerial
     with HasPeripheryUART
     with HasPeripheryBlockDevice
+    with HasPeripheryNVDLA
 {
   override lazy val module = new FireSimNoNICModuleImp(this)
 }

@@ -8,6 +8,7 @@ import freechips.rocketchip.devices.tilelink.BootROMParams
 import boom.system.BoomTilesKey
 import testchipip.{WithBlockDevice, BlockDeviceKey, BlockDeviceConfig}
 import sifive.blocks.devices.uart.{PeripheryUARTKey, UARTParams}
+import nvidia.blocks.dla._
 import icenet._
 
 class WithBootROM extends Config((site, here, up) => {
@@ -57,6 +58,10 @@ class BoomWithLargeTLBs extends Config((site, here, up) => {
   ))
 })
 
+class WithNVDLALarge extends Config((site, here, up) => {
+  case NVDLAKey => Some(NVDLAParams(config = "large", raddress = 0x10040000L))
+  case NVDLAFrontBusExtraBuffers => 0
+})
 
 /*******************************************************************************
 * Full TARGET_CONFIG configurations. These set parameters of the target being
@@ -78,6 +83,7 @@ class FireSimRocketChipConfig extends Config(
   new WithBlockDevice ++
   new WithLargeTLBs ++
   new WithPerfCounters ++
+  new WithNVDLALarge ++
   new freechips.rocketchip.system.DefaultConfig)
 
 // single core config
