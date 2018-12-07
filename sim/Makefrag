@@ -27,6 +27,10 @@ simif_dir = $(firesim_base_dir)/midas/src/main/cc
 midas_h  = $(shell find $(simif_dir) -name "*.h")
 midas_cc = $(shell find $(simif_dir) -name "*.cc")
 
+nvdla_dir := $(firesim_base_dir)/../target-design/firechip/nvidia-dla-blocks
+include $(nvdla_dir)/vsrc.mk
+nvdla_vsrc_dir := $(nvdla_dir)/vsrc/large
+
 common_cxx_flags := $(TARGET_CXX_FLAGS) -Wno-unused-variable
 common_ld_flags := $(TARGET_LD_FLAGS) -lrt
 
@@ -58,11 +62,14 @@ $(verilator) $(verilator_debug): export LDFLAGS := $(LDFLAGS) $(common_ld_flags)
 
 $(verilator): $(HEADER) $(DRIVER_CC) $(DRIVER_H) $(midas_cc) $(midas_h)
 	$(MAKE) -C $(simif_dir) verilator PLATFORM=$(PLATFORM) DESIGN=$(DESIGN) \
-	GEN_DIR=$(GENERATED_DIR) DRIVER="$(DRIVER_CC)"
+	GEN_DIR=$(GENERATED_DIR) DRIVER="$(DRIVER_CC)" EXTRA_VSRCS="$(NVDLA_LARGE_VSRCS)" \
+        VERILOG_INC=$(nvdla_vsrc_dir)/vmod/include
 
+include /home/centos/firesim-4/target-design/firechip/nvidia-dla-blocks/vsrc.mk
 $(verilator_debug): $(HEADER) $(DRIVER_CC) $(DRIVER_H) $(midas_cc) $(midas_h)
 	$(MAKE) -C $(simif_dir) verilator-debug PLATFORM=$(PLATFORM) DESIGN=$(DESIGN) \
-	GEN_DIR=$(GENERATED_DIR) DRIVER="$(DRIVER_CC)"
+	GEN_DIR=$(GENERATED_DIR) DRIVER="$(DRIVER_CC)" EXTRA_VSRCS="$(NVDLA_LARGE_VSRCS)" \
+	VERILOG_INC=$(nvdla_vsrc_dir)/vmod/include
 
 verilator: $(verilator)
 verilator-debug: $(verilator_debug)
@@ -114,13 +121,12 @@ $(f1): $(HEADER) $(DRIVER_CC) $(DRIVER_H) $(midas_cc) $(midas_h) $(runtime_conf)
 #############################
 # FPGA Build Initialization #
 #############################
-board_dir 	   := $(fpga_dir)/hdk/cl/developer_designs
+board_dir      := $(fpga_dir)/hdk/cl/developer_designs
 fpga_work_dir  := $(board_dir)/cl_$(name_tuple)
 build_dir      := $(fpga_work_dir)/build
 verif_dir      := $(fpga_work_dir)/verif
 fpga_v         := $(fpga_work_dir)/design/cl_firesim_generated.sv
 ila_work_dir   := $(fpga_work_dir)/design/ila_files/
-nvdla_vsrc_dir := $(firesim_base_dir)/../target-design/firechip/nvidia-dla-blocks/vsrc/large
 nvdla_work_dir := $(fpga_work_dir)/design/nvdla_large
 
 $(fpga_work_dir)/stamp: $(shell find $(board_dir)/cl_firesim -name '*')
