@@ -23,23 +23,20 @@ class WithPeripheryBusFrequency(freq: BigInt) extends Config((site, here, up) =>
 class WithUARTKey extends Config((site, here, up) => {
    case PeripheryUARTKey => List(UARTParams(
      address = BigInt(0x54000000L),
-     initBaudRate = BigInt(3686400L)))
+     nTxEntries = 256,
+     nRxEntries = 256))
 })
 
 class WithNICKey extends Config((site, here, up) => {
-  case NICKey => NICConfig(inBufPackets = 10)
+  case NICKey => NICConfig(
+    inBufPackets = 64,
+    ctrlQueueDepth = 64)
 })
 
-class WithLargeTLBs extends Config((site, here, up) => {
+class WithRocketL2TLBs(entries: Int) extends Config((site, here, up) => {
   case RocketTilesKey => up(RocketTilesKey) map (tile => tile.copy(
-    icache = tile.icache map (_.copy(
-      nTLBEntries = 32 // TLB reach = 32 * 4KB = 128KB
-    )),
-    dcache = tile.dcache map (_.copy(
-      nTLBEntries = 32 // TLB reach = 32 * 4KB = 128KB
-    )),
     core = tile.core.copy(
-      nL2TLBEntries = 1024 // TLB reach = 1024 * 4KB = 4MB
+      nL2TLBEntries = entries
     )
   ))
 })
@@ -50,17 +47,30 @@ class WithPerfCounters extends Config((site, here, up) => {
   ))
 })
 
-class BoomWithLargeTLBs extends Config((site, here, up) => {
+class WithBoomL2TLBs(entries: Int) extends Config((site, here, up) => {
   case BoomTilesKey => up(BoomTilesKey) map (tile => tile.copy(
-    core = tile.core.copy(
-      nL2TLBEntries = 1024 // TLB reach = 1024 * 4KB = 4MB
-    )
+    core = tile.core.copy(nL2TLBEntries = entries)
   ))
 })
 
 class WithNVDLALarge extends Config((site, here, up) => {
   case NVDLAKey => Some(NVDLAParams(config = "large", raddress = 0x10040000L))
   case NVDLAFrontBusExtraBuffers => 0
+
+class WithTraceRocket extends Config((site, here, up) => {
+   case RocketTilesKey => up(RocketTilesKey, site) map { r => r.copy(trace = true) }
+})
+
+class WithTraceBoom extends Config((site, here, up) => {
+   case BoomTilesKey => up(BoomTilesKey, site) map { r => r.copy(trace = true) }
+})
+
+// This is strictly speakig a MIDAS config, but it's target dependent -> mix in to target config
+class WithBoomSynthAssertExcludes extends Config((site, here, up) => {
+  case midas.ExcludeInstanceAsserts => Seq(
+    // Boom instantiates duplicates of these module(s) with the expectation
+    // the backend tool will optimize them away. FIXME.
+    ("NonBlockingDCache", "dtlb"))
 })
 
 /*******************************************************************************
@@ -81,30 +91,55 @@ class FireSimRocketChipConfig extends Config(
   new WithUARTKey ++
   new WithNICKey ++
   new WithBlockDevice ++
-  new WithLargeTLBs ++
+  new WithRocketL2TLBs(1024) ++
   new WithPerfCounters ++
   new WithNVDLALarge ++
   new freechips.rocketchip.system.DefaultConfig)
 
+class WithNDuplicatedRocketCores(n: Int) extends Config((site, here, up) => {
+  case RocketTilesKey => List.tabulate(n)(i => up(RocketTilesKey).head.copy(hartId = i))
+})
+
+class FireSimRocketChipTracedConfig extends Config(
+  new WithTraceRocket ++ new FireSimRocketChipConfig)
+
 // single core config
 class FireSimRocketChipSingleCoreConfig extends Config(new FireSimRocketChipConfig)
 
+class FireSimRocketChipSingleCoreTracedConfig extends Config(
+  new WithTraceRocket ++ new FireSimRocketChipSingleCoreConfig)
+
 // dual core config
-class FireSimRocketChipDualCoreConfig extends Config(new WithNBigCores(2) ++
+class FireSimRocketChipDualCoreConfig extends Config(
+  new WithNDuplicatedRocketCores(2) ++
   new FireSimRocketChipSingleCoreConfig)
+
+class FireSimRocketChipDualCoreTracedConfig extends Config(
+  new WithTraceRocket ++ new FireSimRocketChipDualCoreConfig)
 
 // quad core config
-class FireSimRocketChipQuadCoreConfig extends Config(new WithNBigCores(4) ++
+class FireSimRocketChipQuadCoreConfig extends Config(
+  new WithNDuplicatedRocketCores(4) ++
   new FireSimRocketChipSingleCoreConfig)
+
+class FireSimRocketChipQuadCoreTracedConfig extends Config(
+  new WithTraceRocket ++ new FireSimRocketChipQuadCoreConfig)
 
 // hexa core config
-class FireSimRocketChipHexaCoreConfig extends Config(new WithNBigCores(6) ++
+class FireSimRocketChipHexaCoreConfig extends Config(
+  new WithNDuplicatedRocketCores(6) ++
   new FireSimRocketChipSingleCoreConfig)
+
+class FireSimRocketChipHexaCoreTracedConfig extends Config(
+  new WithTraceRocket ++ new FireSimRocketChipHexaCoreConfig)
 
 // octa core config
-class FireSimRocketChipOctaCoreConfig extends Config(new WithNBigCores(8) ++
+class FireSimRocketChipOctaCoreConfig extends Config(
+  new WithNDuplicatedRocketCores(8) ++
   new FireSimRocketChipSingleCoreConfig)
 
+class FireSimRocketChipOctaCoreTracedConfig extends Config(
+  new WithTraceRocket ++ new FireSimRocketChipOctaCoreConfig)
 
 class FireSimBoomConfig extends Config(
   new WithBootROM ++
@@ -114,6 +149,22 @@ class FireSimBoomConfig extends Config(
   new WithUARTKey ++
   new WithNICKey ++
   new WithBlockDevice ++
-  new BoomWithLargeTLBs ++
+  new WithBoomL2TLBs(1024) ++
+  new WithBoomSynthAssertExcludes ++ // Will do nothing unless assertion synth is enabled
   // Using a small config because it has 64-bit system bus, and compiles quickly
   new boom.system.SmallBoomConfig)
+
+// A safer implementation than the one in BOOM in that it
+// duplicates whatever BOOMTileKey.head is present N times. This prevents
+// accidentally (and silently) blowing away configurations that may change the
+// tile in the "up" view
+class WithNDuplicatedBoomCores(n: Int) extends Config((site, here, up) => {
+  case BoomTilesKey => List.tabulate(n)(i => up(BoomTilesKey).head.copy(hartId = i))
+})
+
+class FireSimBoomDualCoreConfig extends Config(
+  new WithNDuplicatedBoomCores(2) ++
+  new FireSimBoomConfig)
+
+class FireSimBoomTracedConfig extends Config(
+  new WithTraceBoom ++ new FireSimBoomConfig)
