@@ -56,6 +56,7 @@ class WithBoomL2TLBs(entries: Int) extends Config((site, here, up) => {
 class WithNVDLALarge extends Config((site, here, up) => {
   case NVDLAKey => Some(NVDLAParams(config = "large", raddress = 0x10040000L))
   case NVDLAFrontBusExtraBuffers => 0
+})
 
 class WithTraceRocket extends Config((site, here, up) => {
    case RocketTilesKey => up(RocketTilesKey, site) map { r => r.copy(trace = true) }
@@ -93,7 +94,6 @@ class FireSimRocketChipConfig extends Config(
   new WithBlockDevice ++
   new WithRocketL2TLBs(1024) ++
   new WithPerfCounters ++
-  new WithNVDLALarge ++
   new freechips.rocketchip.system.DefaultConfig)
 
 class WithNDuplicatedRocketCores(n: Int) extends Config((site, here, up) => {

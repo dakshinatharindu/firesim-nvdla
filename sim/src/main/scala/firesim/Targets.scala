@@ -2,6 +2,8 @@ package firesim.firesim
 
 import chisel3._
 import freechips.rocketchip._
+import freechips.rocketchip.diplomacy._
+import freechips.rocketchip.tilelink._
 import freechips.rocketchip.subsystem._
 import freechips.rocketchip.devices.tilelink._
 import freechips.rocketchip.config.Parameters
@@ -40,6 +42,10 @@ class FireSim(implicit p: Parameters) extends RocketSubsystem
   override lazy val module =
     if (hasTraces) new FireSimModuleImpTraced(this)
     else new FireSimModuleImp(this)
+
+  val error = LazyModule(new TLError(p(ErrorDeviceKey), sbus.beatBytes))
+  // always buffer the error device because no one cares about its latency
+  sbus.coupleTo("slave_named_error"){ error.node := TLBuffer() := _ }
 }
 
 class FireSimModuleImp[+L <: FireSim](l: L) extends RocketSubsystemModuleImp(l)
@@ -72,6 +78,10 @@ class FireSimNoNIC(implicit p: Parameters) extends RocketSubsystem
   override lazy val module =
     if (hasTraces) new FireSimNoNICModuleImpTraced(this)
     else new FireSimNoNICModuleImp(this)
+
+  val error = LazyModule(new TLError(p(ErrorDeviceKey), sbus.beatBytes))
+  // always buffer the error device because no one cares about its latency
+  sbus.coupleTo("slave_named_error"){ error.node := TLBuffer() := _ }
 }
 
 class FireSimNoNICModuleImp[+L <: FireSimNoNIC](l: L) extends RocketSubsystemModuleImp(l)
