@@ -12,7 +12,7 @@ cd firesim-nvdla
 ./build-setup.sh fast
 ```
 
-Once you successfully run a single-node simulation, come back here and follow the rest of instructions.
+Once you successfully run a single-node simulation, come back to this guide and follow the rest of instructions.
 
 ## Running YOLOv3 on NVDLA
 In this section, we guide you through configuring FireSim to run [YOLOv3](https://pjreddie.com/darknet/yolo) object detection algorithm on NVDLA. We run YOLOv3 on a modified version of [Darknet](https://github.com/CSL-KU/darknet-nvdla) neural network framework that supports NVDLA acceleration. First, download Darknet and rebuild the target software:
@@ -23,7 +23,7 @@ cd firesim-nvdla/sw/firesim-software
 ./sw-manager.py -c br-disk.json build
 ```
 
-Then, configure FireSim to simulate a target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
+Then, configure FireSim to simulate the target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
