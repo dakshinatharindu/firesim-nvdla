@@ -23,7 +23,7 @@ cd firesim-nvdla/sw/firesim-software
 ./sw-manager.py -c br-disk.json build
 ```
 
-Then, configure FireSim to simulate a target which has the NVDLA model. In `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
+Then, configure FireSim to simulate a target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
