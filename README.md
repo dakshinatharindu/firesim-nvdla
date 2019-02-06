@@ -4,7 +4,7 @@ This is a fork of the [FireSim](https://github.com/firesim/firesim) repository w
 
 ## Using FireSim
 
-To simulate NVDLA, first, you need to learn how to use FireSim. After that, simulating NVDLA should be very easy. We recommend you to follow the steps in the [FireSim documentation](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you need to use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
+To simulate NVDLA, first, you need to learn how to use FireSim. After that, simulating NVDLA should be very easy. We recommend to follow the steps in the [FireSim documentation](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you need to use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
@@ -70,7 +70,7 @@ cd /usr/darknet-nvdla/
 ./solo.sh
 ```
 
-The command above launches Darknet and executes YOLOv3 on the image `darknet-nvdla/data/dog.jpg`. The time that it takes to run the algorithm and the probabilities of objects detected in the image should appear on the screen:
+The command above launches Darknet and runs YOLOv3 on the image `darknet-nvdla/data/dog.jpg`. The time that it takes to run the algorithm and the probabilities of objects detected in the image should appear on the screen:
 
 ```
 ...
