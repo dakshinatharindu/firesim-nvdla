@@ -70,7 +70,7 @@ cd /usr/darknet-nvdla/
 ./solo.sh
 ```
 
-The command above launches Darknet and runs YOLOv3 on the image `darknet-nvdla/data/dog.jpg`. The time that it takes to run the algorithm and the probabilities of objects detected in the image should appear on the screen:
+The command above launches Darknet and runs YOLOv3 on the image `darknet-nvdla/data/dog.jpg`. When the computations are done, the time that it takes to run the algorithm and the probabilities of objects detected in the image should appear on the screen:
 
 ```
 ...
