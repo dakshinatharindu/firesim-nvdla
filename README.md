@@ -83,7 +83,7 @@ bicycle: 100%
 ## Building Your Own Hardware
 The default target configuration we provided above is for a quad-core processor with no network interface, a last-level cache with the maximum size of 4 MiB, and a DDR3 model with FR-FCFS controller. It is simple and easy to add NVDLA to any other configuration and build your own FPGA image. First, learn how to build a FireSim FPGA image by reading ["Building Your Own Hardware Designs (FireSim FPGA Images)"](http://docs.fires.im/en/1.4.0/Building-a-FireSim-AFI.html) and learn about the meaning and use of parameters in [`config_build_recipes.ini`](http://docs.fires.im/en/1.4.0/Advanced-Usage/Manager/Manager-Configuration-Files.html#config-build-recipes-ini).
 
-Once you know how to build a FireSim FPGA image, building your own custom configuration with NVDLA is easy. Simply, add a new build definition in `config_build_recipes.ini` which matches your custom configuration and add `_WithNVDLALarge` to the end of `TARGET_CONFIG` parameter. For example, to build an image for a single-core processor with a network interface and a latency-bandwidth pipe memory model, use the build definition below:
+Once you know how to build a FireSim FPGA image, building your own custom configuration with NVDLA is easy. Simply, add a new build definition in `config_build_recipes.ini` which matches your custom configuration and add `_WithNVDLALarge` to the end of `TARGET_CONFIG` parameter. For example, use the build definition below to build an image for a single-core processor with a network interface and a latency-bandwidth pipe memory model:
 
 ```
 [name-of-build-definition]
