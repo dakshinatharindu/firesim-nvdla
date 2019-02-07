@@ -86,7 +86,7 @@ The default target configuration we provided above is for a quad-core processor 
 Once you know how to build a FireSim FPGA image, building your own custom configuration with NVDLA is easy. Simply, add a new build definition in `config_build_recipes.ini` which matches your custom configuration and add `_WithNVDLALarge` to the end of `TARGET_CONFIG` parameter. For example, use the build definition below to build an image for a single-core processor with a network interface and a latency-bandwidth pipe memory model:
 
 ```
-[name-of-build-definition]
+[name-of-configuration]
 DESIGN=FireSim
 TARGET_CONFIG=FireSimRocketChipSingleCoreConfig_WithNVDLALarge
 PLATFORM_CONFIG=FireSimConfig
@@ -94,6 +94,6 @@ instancetype=c4.4xlarge
 deploytriplet=None
 ```
 
-You can replace `name-of-build-definition` with your own desired name. Follow the instructions on the FireSim documentation to build the AGFI and add it to `config_hwdb.ini`. NVDLA is a large design therefore, it takes about 8 hours to finish the build on a c4.4xlarge instance. To simulate your new build, replace `defaulthwconfig` in `config_runtime.ini` with `name-of-build-definition`.
+Replace `name-of-configuration` with the desired name for your new configuration. Follow the instructions on the FireSim documentation to build the AGFI and add it to `config_hwdb.ini`. NVDLA is a large design therefore, it takes about 8 hours to finish the build on a c4.4xlarge instance. To simulate your new build, replace `defaulthwconfig` in `config_runtime.ini` with `name-of-configuration`.
 
-You can do cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the system and memory bus width and see how the NVDLA performance changes.
+You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
