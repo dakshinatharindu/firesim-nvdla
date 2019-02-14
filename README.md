@@ -74,7 +74,7 @@ The command above launches Darknet and runs YOLOv3 on the image `darknet-nvdla/d
 
 ```
 ...
-data/dog.jpg: Predicted in 0.195189 seconds.
+data/dog.jpg: Predicted in 0.132563 seconds.
 dog: 95%
 truck: 90%
 bicycle: 100%
