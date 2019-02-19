@@ -4,7 +4,7 @@ This is a fork of the [FireSim](https://github.com/firesim/firesim) repository w
 
 ## Using FireSim
 
-To simulate NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA should be very easy. We recommend following the steps in the [FireSim documentation](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you need to use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
+To simulate NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is very easy. We recommend following the steps in the [FireSim documentation](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you need to use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
@@ -15,7 +15,7 @@ cd firesim-nvdla
 Once you successfully run a single-node simulation, come back to this guide and follow the rest of instructions.
 
 ## Running YOLOv3 on NVDLA
-In this section, we guide you through configuring FireSim to run [YOLOv3](https://pjreddie.com/darknet/yolo) object detection algorithm on NVDLA. We run YOLOv3 on a modified version of the [Darknet](https://github.com/CSL-KU/darknet-nvdla) neural network framework that supports NVDLA acceleration. First, download Darknet and rebuild the target software:
+In this section, we guide you through configuring FireSim to run [YOLOv3](https://pjreddie.com/darknet/yolo) object detection algorithm on NVDLA. YOLOv3 runs on a modified version of the [Darknet](https://github.com/CSL-KU/darknet-nvdla) neural network framework that supports NVDLA acceleration. First, download Darknet and rebuild the target software:
 
 ```
 cd firesim-nvdla/sw/firesim-software
@@ -23,7 +23,7 @@ cd firesim-nvdla/sw/firesim-software
 ./sw-manager.py -c br-disk.json build
 ```
 
-Then, configure FireSim to simulate the target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
+Then, configure FireSim to simulate the target which includes the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
