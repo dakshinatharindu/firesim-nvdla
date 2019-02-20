@@ -80,6 +80,8 @@ truck: 90%
 bicycle: 100%
 ```
 
+Darknet saves the output image with bounding boxes around the detected objects in `darknet-nvdla/predictions.png`.
+
 ## Building Your Own Hardware
 The pre-built target we provided above is for a quad-core processor with no network interface, a last-level cache with the maximum size of 4 MiB, and a DDR3 model with FR-FCFS controller. It is simple and easy to add NVDLA to any other configuration and build your own FPGA image. First, learn how to build a FireSim FPGA image by reading ["Building Your Own Hardware Designs (FireSim FPGA Images)"](http://docs.fires.im/en/1.4.0/Building-a-FireSim-AFI.html) and learn about the meaning and use of parameters in [`config_build_recipes.ini`](http://docs.fires.im/en/1.4.0/Advanced-Usage/Manager/Manager-Configuration-Files.html#config-build-recipes-ini).
 
