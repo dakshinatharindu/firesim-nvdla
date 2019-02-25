@@ -84,7 +84,7 @@ dog: 99%
 person: 100%
 ```
 
-Darknet saves the image with bounding boxes drawn around the detected objects in `darknet-nvdla/predictions.png`:
+Darknet saves the image with bounding boxes around the detected objects in `darknet-nvdla/predictions.png`:
 
 <p align="center">
 <img src="http://www.ittc.ku.edu/~farshchi/firesim-nvdla/person-detected.png" width="550">
