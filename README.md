@@ -1,8 +1,10 @@
 # FireSim-NVDLA: NVDLA Integrated with Rocket Chip SoC on FireSim
 
-This is a fork of the [FireSim](https://github.com/firesim/firesim) repository which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into.
+This is a fork of the [FireSim](https://github.com/firesim/firesim) repository which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into. FireSim-NVDLA runs on the FPGA in Amazon cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
 
-<img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/intg.png" width="450">
+<p align="center">
+<img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/overview.png" width="450">
+</p>
 
 ## Using FireSim
 
@@ -72,17 +74,21 @@ cd /usr/darknet-nvdla/
 ./solo.sh
 ```
 
-The command above launches Darknet and runs YOLOv3 on the image `darknet-nvdla/data/dog.jpg`. Once detection is done, the time that it takes to run the algorithm and the probabilities of objects detected in the image appear on the screen:
+The command above launches Darknet and runs YOLOv3 on the image `darknet-nvdla/data/person.jpg`. Once detection is done, the time that it takes to run the algorithm and the probabilities of objects detected in the image appear on the screen:
 
 ```
 ...
-data/dog.jpg: Predicted in 0.132563 seconds.
-dog: 95%
-truck: 90%
-bicycle: 100%
+data/person.jpg: Predicted in 0.129548 seconds.
+horse: 100%
+dog: 99%
+person: 100%
 ```
 
-Darknet saves the output image with bounding boxes around the detected objects in `darknet-nvdla/predictions.png`.
+Darknet saves the output image with bounding boxes around the detected objects in `darknet-nvdla/predictions.png`:
+
+<p align="center">
+<img src="http://www.ittc.ku.edu/~farshchi/firesim-nvdla/person-detected.png" width="450">
+</p>
 
 ## Building Your Own Hardware
 The pre-built target we provided above is for a quad-core processor with no network interface, a last-level cache with the maximum size of 4 MiB, and a DDR3 model with FR-FCFS controller. It is simple and easy to add NVDLA to any other configuration and build your own FPGA image. First, learn how to build a FireSim FPGA image by reading ["Building Your Own Hardware Designs (FireSim FPGA Images)"](http://docs.fires.im/en/1.4.0/Building-a-FireSim-AFI.html) and learn about the meaning and use of parameters in [`config_build_recipes.ini`](http://docs.fires.im/en/1.4.0/Advanced-Usage/Manager/Manager-Configuration-Files.html#config-build-recipes-ini).
@@ -105,4 +111,4 @@ You can do all sort of cool things by experimenting with different configuration
 ## EMC<sup>2</sup> Workshop Paper
 You can read our EMC<sup>2</sup> workshop paper to learn more about the integration of NVDLA into FireSim and find out how we used this platform to evaluate the perforamnce of NVDLA:
 
-Farzad Farshchi, Qijing Huang, and Heechul Yun, **"Integrating NVIDIA Deep Learning Accelerator (NVDLA) with RISC-V SoC on FireSim"**, 2nd Workshop on Energy Efficient Machine Learning and Cognitive Computing for Embedded Applications (EMC<sup>2</sup> 2019), Washington, DC, February 2019. [Paper](http://www.ittc.ku.edu/~farshchi/nvdla-firesim-emc2-paper.pdf) | [Slides](http://www.ittc.ku.edu/~farshchi/nvdla-firesim-emc2-slides.pdf)
+Farzad Farshchi, Qijing Huang, and Heechul Yun, **"Integrating NVIDIA Deep Learning Accelerator (NVDLA) with RISC-V SoC on FireSim"**, 2nd Workshop on Energy Efficient Machine Learning and Cognitive Computing for Embedded Applications (EMC<sup>2</sup> 2019), Washington, DC, February 2019. [Paper](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-paper.pdf) | [Slides](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-slides.pdf)
