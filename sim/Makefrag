@@ -54,7 +54,6 @@ $(verilator): $(HEADER) $(DRIVER_CC) $(DRIVER_H) $(midas_cc) $(midas_h)
 	GEN_DIR=$(GENERATED_DIR) DRIVER="$(DRIVER_CC)" EXTRA_VSRCS="$(NVDLA_LARGE_VSRCS)" \
         VERILOG_INC=$(nvdla_vsrc_dir)/vmod/include
 
-include /home/centos/firesim-4/target-design/firechip/nvidia-dla-blocks/vsrc.mk
 $(verilator_debug): $(HEADER) $(DRIVER_CC) $(DRIVER_H) $(midas_cc) $(midas_h)
 	$(MAKE) -C $(simif_dir) verilator-debug PLATFORM=$(PLATFORM) DESIGN=$(DESIGN) \
 	GEN_DIR=$(GENERATED_DIR) DRIVER="$(DRIVER_CC)" EXTRA_VSRCS="$(NVDLA_LARGE_VSRCS)" \
