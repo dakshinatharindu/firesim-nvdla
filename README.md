@@ -109,7 +109,7 @@ Replace `name-of-configuration` with the desired name for your new configuration
 You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
 
 ## Questions and Bug Report
-If you have a question about using FireSim-NVDLA or you want to report a bug, please use Issues tab on this repository.
+If you have a question about using FireSim-NVDLA or you want to report a bug, please use the Issues tab on this repository.
 
 ## EMC<sup>2</sup> Workshop Paper
 You can read our EMC<sup>2</sup> workshop paper to learn more about the integration of NVDLA into FireSim and find out how we used this platform to evaluate the perforamnce of NVDLA:
