@@ -8,7 +8,7 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) rep
 
 ## Using FireSim
 
-To simulate NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is very easy. We recommend following the steps in the [FireSim documentation](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
+To simulate NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is very easy. We recommend following the steps in the [FireSim documentation (v1.4)](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
@@ -107,6 +107,9 @@ deploytriplet=None
 Replace `name-of-configuration` with the desired name for your new configuration. Follow the instructions on the FireSim documentation to build the AGFI and add it to `config_hwdb.ini`. NVDLA is a large design therefore, it takes about 8 hours to finish the build on a c4.4xlarge instance. To simulate the target you have built, replace `defaulthwconfig` in `config_runtime.ini` with `name-of-configuration`.
 
 You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
+
+## Questions and Bug Report
+If you have any question regarding the use of FireSim-NVDLA or you want to report a bug, please use "Issues" on this repository.
 
 ## EMC<sup>2</sup> Workshop Paper
 You can read our EMC<sup>2</sup> workshop paper to learn more about the integration of NVDLA into FireSim and find out how we used this platform to evaluate the perforamnce of NVDLA:
