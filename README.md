@@ -8,7 +8,7 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) rep
 
 ## Using FireSim
 
-To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is very easy. We recommend following the steps in the [FireSim documentation (v1.4)](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
+To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA would be very easy. We recommend following the steps in the [FireSim documentation (v1.4)](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
