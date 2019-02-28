@@ -15,7 +15,7 @@ git clone https://github.com/CSL-KU/firesim-nvdla
 cd firesim-nvdla
 ./build-setup.sh fast
 ```
-**Note:** At this time, if you launch a new EC2 instance of `FPGA Developer AMI`, your option is limited to the latest version which is 1.5.0. FireSim-NVDLA is tested to work on versions 1.4.0 and 1.5.0.
+**Note:** FireSim-NVDLA is tested to work on `FPGA Developer AMI` versions 1.4.0 and 1.5.0. At this time, if you launch a new EC2 instance of `FPGA Developer AMI`, you have to use the latest version which is 1.5.0.
 
 Once you successfully run a single-node simulation, come back to this guide and follow the rest of instructions.
 
