@@ -1,6 +1,6 @@
 # FireSim-NVDLA: NVDLA Integrated with Rocket Chip SoC on FireSim
 
-FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) repository which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into and runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
+FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) repository which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
 
 <p align="center">
 <img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/overview.png" width="450">
@@ -8,13 +8,14 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) rep
 
 ## Using FireSim
 
-To simulate NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is very easy. We recommend following the steps in the [FireSim documentation (v1.4)](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
+To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA would be very easy. We recommend following the steps in the [FireSim documentation (v1.4)](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
 cd firesim-nvdla
 ./build-setup.sh fast
 ```
+**Note:** FireSim-NVDLA is tested to work on `FPGA Developer AMI` versions 1.4.0 and 1.5.0. At this time, if you launch a new EC2 instance of `FPGA Developer AMI`, you have to use the latest version which is 1.5.0.
 
 Once you successfully run a single-node simulation, come back to this guide and follow the rest of instructions.
 
@@ -27,7 +28,7 @@ cd firesim-nvdla/sw/firesim-software
 ./sw-manager.py -c br-disk.json build
 ```
 
-Then, configure FireSim to simulate the target which includes the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
+Then, configure FireSim to simulate the target which includes NVDLA. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
@@ -108,10 +109,11 @@ Replace `name-of-configuration` with the desired name for your new configuration
 
 You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
 
-## Questions and Bug Report
-If you have a question about using FireSim-NVDLA or you want to report a bug, please use the Issues tab on this repository.
+## Questions and Reporting Bugs
+If you have a question about using FireSim-NVDLA or you want to report a bug, please use the Issues tab on this repository to file an issue.
 
 ## EMC<sup>2</sup> Workshop Paper
 You can read our EMC<sup>2</sup> workshop paper to learn more about the integration of NVDLA into FireSim and find out how we used this platform to evaluate the perforamnce of NVDLA:
 
-Farzad Farshchi, Qijing Huang, and Heechul Yun, **"Integrating NVIDIA Deep Learning Accelerator (NVDLA) with RISC-V SoC on FireSim"**, 2nd Workshop on Energy Efficient Machine Learning and Cognitive Computing for Embedded Applications (EMC<sup>2</sup> 2019), Washington, DC, February 2019. [Paper](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-paper.pdf) | [Slides](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-slides.pdf)
+Farzad Farshchi, Qijing Huang, and Heechul Yun, **"Integrating NVIDIA Deep Learning Accelerator (NVDLA) with RISC-V SoC on FireSim"**, 2nd Workshop on Energy Efficient Machine Learning and Cognitive Computing for Embedded Applications (EMC<sup>2</sup> 2019), Washington, DC, February 2019. [Paper PDF](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-paper.pdf) | [Slides](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-slides.pdf)
+
