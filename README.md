@@ -1,10 +1,6 @@
 # FireSim-NVDLA: NVDLA Integrated with Rocket Chip SoC on FireSim
 
-<<<<<<< HEAD
 FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPGA-accelerated full-system simulator which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
-=======
-FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) repository which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
->>>>>>> 700c4f11be6e2e981e71b3adc37c441754fb5e29
 
 <p align="center">
 <img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/overview.png" width="450">
@@ -12,18 +8,13 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) rep
 
 ## Using FireSim
 
-<<<<<<< HEAD
 To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is going to be very easy. We recommend following the steps in the [FireSim documentation (v1.5.0)](http://docs.fires.im/en/1.5.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.5.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
-=======
-To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA would be very easy. We recommend following the steps in the [FireSim documentation (v1.4)](http://docs.fires.im/en/1.4.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.4.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
->>>>>>> 700c4f11be6e2e981e71b3adc37c441754fb5e29
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
 cd firesim-nvdla
 ./build-setup.sh fast
 ```
-**Note:** FireSim-NVDLA is tested to work on `FPGA Developer AMI` versions 1.4.0 and 1.5.0. At this time, if you launch a new EC2 instance of `FPGA Developer AMI`, you have to use the latest version which is 1.5.0.
 
 Once you successfully run a single-node simulation, come back to this guide and follow the rest of instructions.
 
@@ -37,11 +28,7 @@ cd firesim-nvdla/sw/firesim-software
 ./marshal install workloads/darknet-nvdla.json
 ```
 
-<<<<<<< HEAD
 Then, configure FireSim to simulate the target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Additionally change `workloadname` to `darknet-nvdla.json`. Your final `config_runtime.ini` should look like this:
-=======
-Then, configure FireSim to simulate the target which includes NVDLA. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Your final `config_runtime.ini` should look like this:
->>>>>>> 700c4f11be6e2e981e71b3adc37c441754fb5e29
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
