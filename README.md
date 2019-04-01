@@ -110,7 +110,7 @@ Once you know how to build a FireSim FPGA image, building your own custom config
 DESIGN=FireSim
 TARGET_CONFIG=FireSimRocketChipSingleCoreConfig_WithNVDLALarge
 PLATFORM_CONFIG=FireSimConfig75MHz
-instancetype=c5.9xlarge
+instancetype=c5.4xlarge
 deploytriplet=None
 ```
 
