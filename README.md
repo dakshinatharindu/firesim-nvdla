@@ -6,6 +6,14 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPG
 <img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/overview.png" width="450">
 </p>
 
+## Contents
+
+1. [Using FireSim](#using-firesim)
+2. [Running YOLOv3 on NVDLA](#running-yolov3-on-nvdla)
+3. [Building Your Own Hardware](#building-your-own-hardware)
+4. [Questions and Reporting Bugs](#questions-and-reporting-bugs)
+5. [EMC<sup>2</sup> Workshop Paper](#emc2-workshop-paper)
+
 ## Using FireSim
 
 To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, simulating NVDLA is going to be very easy. We recommend following the steps in the [FireSim documentation (v1.5.0)](http://docs.fires.im/en/1.5.0) to set up the simulator and run a single-node simulation. The only difference is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.5.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
@@ -23,8 +31,8 @@ In this section, we guide you through configuring FireSim to run [YOLOv3](https:
 
 ```
 cd firesim-nvdla/sw/firesim-software
-./get-darknet
-./marshal build workloads/darknet-nvdla.json
+./get-darknet.sh
+./marshal -v build workloads/darknet-nvdla.json
 ./marshal install workloads/darknet-nvdla.json
 ```
 
