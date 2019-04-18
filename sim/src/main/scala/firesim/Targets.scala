@@ -117,6 +117,7 @@ class FireBoom(implicit p: Parameters) extends BoomSubsystem
     with HasPeripheryUART
     with HasPeripheryIceNIC
     with HasPeripheryBlockDevice
+    with HasPeripheryNVDLA
 {
   val hasTraces = boomTiles.map(_.boomParams.trace).reduce(_ || _)
 
@@ -153,6 +154,7 @@ class FireBoomNoNIC(implicit p: Parameters) extends BoomSubsystem
     with HasPeripherySerial
     with HasPeripheryUART
     with HasPeripheryBlockDevice
+    with HasPeripheryNVDLA
 {
   val hasTraces = boomTiles.map(_.boomParams.trace).reduce(_ || _)
 
