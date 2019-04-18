@@ -36,7 +36,7 @@ cd firesim-nvdla/sw/firesim-software
 ./marshal install workloads/darknet-nvdla.json
 ```
 
-Then, configure FireSim to simulate the target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Additionally change `workloadname` to `darknet-nvdla.json`. Your final `config_runtime.ini` should look like this:
+Then, configure FireSim to simulate the target which has the NVDLA model. In order to do that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Additionally, change `workloadname` to `darknet-nvdla.json`. Your final `config_runtime.ini` should look like this:
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
