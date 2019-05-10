@@ -131,7 +131,7 @@ To build the simulator and run the test program:
 cd firesim-nvdla/sim
 export DESIGN=FireSimNoNIC TARGET_CONFIG=FireSimRocketChipQuadCoreConfig_WithNVDLALarge \
 PLATFORM_CONFIG=FireSimDDR3FRFCFSLLC4MBConfig75MHz
-make run-verilator-debug SIM_BINARY=../target-design/firechip/tests/nvdla.riscv
+make run-verilator-debug SIM_BINARY=../target-design/firechip/tests/nvdla.riscv -j
 ```
 
 The test program configures NVDLA, triggers the process and then pools the NVDLA's interrupt status register. Once the job is finished, it prints the number of elapsed cycles:
