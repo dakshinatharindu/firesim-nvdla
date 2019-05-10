@@ -12,7 +12,8 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPG
 2. [Running YOLOv3 on NVDLA](#running-yolov3-on-nvdla)
 3. [Building Your Own Hardware](#building-your-own-hardware)
 4. [Questions and Reporting Bugs](#questions-and-reporting-bugs)
-5. [EMC<sup>2</sup> Workshop Paper](#emc2-workshop-paper)
+5. [RTL Simulation (MIDAS-Level)](#rtl-simulation-midas-level)
+6. [EMC<sup>2</sup> Workshop Paper](#emc2-workshop-paper)
 
 ## Using FireSim
 
@@ -119,21 +120,13 @@ Replace `name-of-your-configuration` with the desired name for your new configur
 You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
 
 ## RTL Simulation (MIDAS-Level)
-The following steps show how to build the Verilator simulator for a Quad-core Rocket Chip with NVDLA:
-```
-cd firesim-nvdla/sim
-export DESIGN=FireSimNoNIC TARGET_CONFIG=FireSimRocketChipQuadCoreConfig_WithNVDLALarge \
-PLATFORM_CONFIG=FireSimDDR3FRFCFSLLC4MBConfig75MHz
-make verilator-debug -j
-```
-
-We have provided a simple bare-metal program named `nvdla.c` to test NVDLA. To compile the program:
+The following steps show how to build the Verilator simulator for a Quad-core Rocket Chip with NVDLA and test it. We have provided a simple bare-metal program named `nvdla.c` to test NVDLA. To compile the program:
 ```
 cd firesim-nvdla/target-design/firechip/tests
 make
 ```
 
-To run the simulation:
+To build the simulator and run the test program:
 ```
 cd firesim-nvdla/sim
 export DESIGN=FireSimNoNIC TARGET_CONFIG=FireSimRocketChipQuadCoreConfig_WithNVDLALarge \
@@ -141,7 +134,7 @@ PLATFORM_CONFIG=FireSimDDR3FRFCFSLLC4MBConfig75MHz
 make run-verilator-debug SIM_BINARY=../target-design/firechip/tests/nvdla.riscv
 ```
 
-The test program configures NVDLA, tirggers the process and then pools the NVDLA's interrupt status register. Once the job is finished, it prints the number of elapsed cycles:
+The test program configures NVDLA, triggers the process and then pools the NVDLA's interrupt status register. Once the job is finished, it prints the number of elapsed cycles:
 ```
 cycle1: 5969, cycle2: 10682, diff: 4713
 ```
