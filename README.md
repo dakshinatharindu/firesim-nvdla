@@ -118,6 +118,36 @@ Replace `name-of-your-configuration` with the desired name for your new configur
 
 You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
 
+## RTL Simulation (MIDAS-Level)
+The following steps show how to build the Verilator simulator for a Quad-core Rocket Chip with NVDLA:
+```
+cd firesim-nvdla/sim
+export DESIGN=FireSimNoNIC TARGET_CONFIG=FireSimRocketChipQuadCoreConfig_WithNVDLALarge \
+PLATFORM_CONFIG=FireSimDDR3FRFCFSLLC4MBConfig75MHz
+make verilator-debug -j
+```
+
+We have provided a simple bare-metal program named `nvdla.c` to test NVDLA. To compile the program:
+```
+cd firesim-nvdla/target-design/firechip/tests
+make
+```
+
+To run the simulation:
+```
+cd firesim-nvdla/sim
+export DESIGN=FireSimNoNIC TARGET_CONFIG=FireSimRocketChipQuadCoreConfig_WithNVDLALarge \
+PLATFORM_CONFIG=FireSimDDR3FRFCFSLLC4MBConfig75MHz
+make run-verilator-debug SIM_BINARY=../target-design/firechip/tests/nvdla.riscv
+```
+
+The test program configures NVDLA, tirggers the process and then pools the NVDLA's interrupt status register. Once the job is finished, it prints the number of elapsed cycles:
+```
+cycle1: 5969, cycle2: 10682, diff: 4713
+```
+
+The simulator saves the .out file and the waveform in `generated-src/f1/$DESIGN-$TARGET_CONFIG-$PLATFORM_CONFIG`. For more information on using the RTL simulator, please refer to ["Debugging & Testing with RTL Simulation"](https://docs.fires.im/en/1.5.0/Advanced-Usage/Debugging/RTL-Simulation.html#debugging-testing-with-rtl-simulation).
+
 ## Questions and Reporting Bugs
 If you have a question about using FireSim-NVDLA or you want to report a bug, please file an issue on this repository.
 
