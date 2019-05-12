@@ -11,8 +11,8 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPG
 1. [Using FireSim](#using-firesim)
 2. [Running YOLOv3 on NVDLA](#running-yolov3-on-nvdla)
 3. [Building Your Own Hardware](#building-your-own-hardware)
-4. [Questions and Reporting Bugs](#questions-and-reporting-bugs)
-5. [RTL Simulation (MIDAS-Level)](#rtl-simulation-midas-level)
+4. [RTL Simulation (MIDAS-Level)](#rtl-simulation-midas-level)
+5. [Questions and Reporting Bugs](#questions-and-reporting-bugs)
 6. [EMC<sup>2</sup> Workshop Paper](#emc2-workshop-paper)
 
 ## Using FireSim
