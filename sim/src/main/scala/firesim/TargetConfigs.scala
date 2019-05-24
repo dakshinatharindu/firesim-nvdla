@@ -53,10 +53,13 @@ class WithBoomL2TLBs(entries: Int) extends Config((site, here, up) => {
   ))
 })
 
-class WithNVDLALarge extends Config((site, here, up) => {
-  case NVDLAKey => Some(NVDLAParams(config = "large", raddress = 0x10040000L))
+class WithNVDLA(config: String) extends Config((site, here, up) => {
+  case NVDLAKey => Some(NVDLAParams(config = config, raddress = 0x10040000L))
   case NVDLAFrontBusExtraBuffers => 0
 })
+
+class WithNVDLALarge extends WithNVDLA("large")
+class WithNVDLASmall extends WithNVDLA("small")
 
 class WithTraceRocket extends Config((site, here, up) => {
    case RocketTilesKey => up(RocketTilesKey, site) map { r => r.copy(trace = true) }
