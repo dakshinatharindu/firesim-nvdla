@@ -1,6 +1,6 @@
 # FireSim-NVDLA: NVDLA Integrated with Rocket Chip SoC on FireSim
 
-FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPGA-accelerated full-system simulator which we have integrated [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org) into. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
+FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPGA-accelerated full-system simulator integrated with [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org). This integration is done and maintained in the Computer Systems Design Laboratory at the University of Kansas. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
 
 <p align="center">
 <img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/overview.png" width="450">
@@ -17,7 +17,7 @@ FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPG
 
 ## Using FireSim
 
-To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, working with FireSim-NVDLA is pretty straightforward. We recommend following the steps in the [FireSim documentation (v1.5.0)](http://docs.fires.im/en/1.5.0) to set up the simulator and run a single-node simulation. Please make sure that you are following the right version of the documentation (not the latest versoin). The only difference in setup is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.5.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
+To work with FireSim-NVDLA, first, you need to learn how to use FireSim. Once you learned that, working with FireSim-NVDLA is pretty straightforward. We recommend following the steps in the [FireSim documentation (v1.5.0)](http://docs.fires.im/en/1.5.0) to set up the simulator and run a single-node simulation. Please make sure that you are following the right version of the documentation (not the latest version). The only difference in setup is you use the URL of this repository when cloning FireSim in ["Setting up the FireSim Repo"](http://docs.fires.im/en/1.5.0/Initial-Setup/Setting-up-your-Manager-Instance.html#setting-up-the-firesim-repo):
 
 ```
 git clone https://github.com/CSL-KU/firesim-nvdla
@@ -25,7 +25,7 @@ cd firesim-nvdla
 ./build-setup.sh fast
 ```
 
-Once you successfully run a single-node simulation, come back to this guide and follow the rest of instructions.
+After successfully running a single-node simulation, come back to this guide and follow the rest of instructions.
 
 ## Running YOLOv3 on NVDLA
 In this part, we guide you through configuring FireSim to run [YOLOv3](https://pjreddie.com/darknet/yolo) object detection algorithm on NVDLA. YOLOv3 runs on a modified version of the [Darknet](https://github.com/CSL-KU/darknet-nvdla) neural network framework that supports NVDLA acceleration. First, download Darknet and rebuild the target software:
@@ -37,7 +37,7 @@ cd firesim-nvdla/sw/firesim-software
 ./marshal install workloads/darknet-nvdla.json
 ```
 
-Next, configure FireSim to simulate the target which has the NVDLA model. For that, in firesim-nvdla/deploy/config_runtime.ini, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Additionally, change `workloadname` to `darknet-nvdla.json`. Your final config_runtime.ini should look like this:
+Next, configure FireSim to simulate the target which has the NVDLA model. For that, in `firesim-nvdla/deploy/config_runtime.ini`, change the parameter `defaulthwconfig` to `firesim-quadcore-no-nic-nvdla-ddr3-llc4mb`. Additionally, change `workloadname` to `darknet-nvdla.json`. Your final `config_runtime.ini` should look like this:
 
 ```
 # RUNTIME configuration for the FireSim Simulation Manager
@@ -78,7 +78,7 @@ workloadname=darknet-nvdla.json
 terminateoncompletion=no
 ```
 
-Follow the instructions on the FireSim documentation to launch the simulation, open the console for the target RISC-V machine using `screen -r fsim0`, and log in. Then run:
+Follow the instructions on the FireSim documentation to launch the simulation, open the console for the target RISC-V machine, and log in. Then run:
 
 ```
 cd darknet-nvdla
