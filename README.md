@@ -1,6 +1,6 @@
 # FireSim-NVDLA: NVDLA Integrated with Rocket Chip SoC on FireSim
 
-FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPGA-accelerated full-system simulator integrated with [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org). This integration is done and maintained in the Computer Systems Design Laboratory at the University of Kansas. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
+FireSim-NVDLA is a fork of the [FireSim](https://github.com/firesim/firesim) FPGA-accelerated full-system simulator integrated with [NVIDIA Deep Learning Accelerator (NVDLA)](http://nvdla.org). This integration is maintained by the Computer Systems Design Laboratory at the University of Kansas. FireSim-NVDLA runs on the Amazon FPGA cloud (EC2 F1 instance). The figure below shows the overview of FireSim-NVDLA:
 
 <p align="center">
 <img src="http://ittc.ku.edu/~farshchi/firesim-nvdla/overview.png" width="450">
