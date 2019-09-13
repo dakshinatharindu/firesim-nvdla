@@ -117,7 +117,7 @@ deploytriplet=None
 
 Replace `name-of-your-configuration` with the desired name for your new configuration. Follow the instructions on the FireSim documentation to build the AGFI and add it to `config_hwdb.ini`. NVDLA is a large design therefore, it takes about 10 hours to finish the build on a c5.4xlarge instance. To simulate the target you have built, replace `defaulthwconfig` in `config_runtime.ini` with `name-of-your-configuration`.
 
-You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip SoC can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how the NVDLA performance changes.
+You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip SoC can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how this affects the performance of NVDLA.
 
 ## RTL Simulation (MIDAS-Level)
 The following steps show how to build the Verilator simulator for a Quad-core Rocket Chip with NVDLA and test it. We have provided a simple bare-metal program named `nvdla.c` to test NVDLA. To compile the program:
