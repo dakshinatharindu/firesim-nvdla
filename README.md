@@ -27,7 +27,7 @@ cd firesim-nvdla
 
 After successfully running a single-node simulation, come back to this guide and follow the rest of instructions.
 
-**Note:** Due to an issue with Python 3.4, please use the commands below instead of the text in step 4 at [Launching a “Manager Instance”](https://docs.fires.im/en/latest/Initial-Setup/Setting-up-your-Manager-Instance.html#launching-a-manager-instance). This will install Python 3.6.
+**Note:** Due to an issue with Python 3.4, please use the commands below instead of the text in step 4 at [Launching a “Manager Instance”](http://docs.fires.im/en/1.5.0/Initial-Setup/Setting-up-your-Manager-Instance.html#launching-a-manager-instance). This will install Python 3.6.
 ```
 #!/bin/bash
 echo "machine launch script started" > /home/centos/machine-launchstatus
