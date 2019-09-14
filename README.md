@@ -27,7 +27,7 @@ cd firesim-nvdla
 
 After successfully running a single-node simulation, come back to this guide and follow the rest of instructions.
 
-**Note:** Make sure that you are using `FPGA Developer AMI - 1.6.0`. Version 1.5.0 no longer works due to the issues with Python.
+**Note:** Make sure that you are using `FPGA Developer AMI - 1.6.0`. Version 1.5.0 no longer works due to the issues related to Python.
 
 ## Running YOLOv3 on NVDLA
 In this part, we guide you through configuring FireSim to run [YOLOv3](https://pjreddie.com/darknet/yolo) object detection algorithm on NVDLA. YOLOv3 runs on a modified version of the [Darknet](https://github.com/CSL-KU/darknet-nvdla) neural network framework that supports NVDLA acceleration. First, download Darknet and rebuild the target software:
