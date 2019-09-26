@@ -3,7 +3,7 @@
 	url = https://github.com/CSL-KU/aws-fpga-firesim
 [submodule "sw/firesim-software"]
 	path = sw/firesim-software
-	url = https://github.com/CSL-KU/firesim-software
+	url = https://github.com/nvdla/firesim-software
 [submodule "sim/firrtl"]
 	path = sim/firrtl
 	url = https://github.com/ucb-bar/firrtl
