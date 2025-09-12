@@ -40,6 +40,13 @@ RUN cd /tmp && \
 # Create a symlink for python (optional, for compatibility)
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
+# Install risc-v toolchain
+RUN wget https://github.com/dakshinatharindu/firesim-nvdla/releases/download/riscv64/riscv_64.tar.gz
+RUN tar -xvf riscv64.tar.gz -C /opt
+RUN mv /opt/opt/riscv /opt/riscv
+ENV PATH="/opt/riscv/bin:${PATH}"
+RUN rm -rf riscv64.tar.gz
+
 # Create nvdla user with sudo privileges
 RUN useradd -m -s /bin/bash nvdla && \
     echo "nvdla ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
