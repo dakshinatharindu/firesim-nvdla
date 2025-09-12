@@ -30,6 +30,7 @@ After successfully running a single-node simulation, come back to this guide and
 **Note:** Make sure that you are using `FPGA Developer AMI - 1.6.0`. Version 1.5.0 no longer works due to the issues related to Python.
 
 ## Running YOLOv3 on NVDLA
+
 In this part, we guide you through configuring FireSim to run [YOLOv3](https://pjreddie.com/darknet/yolo) object detection algorithm on NVDLA. YOLOv3 runs on a modified version of the [Darknet](https://github.com/CSL-KU/darknet-nvdla) neural network framework that supports NVDLA acceleration. First, download Darknet and rebuild the target software:
 
 ```
@@ -104,6 +105,7 @@ Darknet saves the image with bounding boxes around the detected objects in `dark
 </p>
 
 ## Building Your Own Hardware
+
 The pre-built target we provided above is for a quad-core processor with no network interface, a last-level cache with the maximum size of 4 MiB, and a DDR3 memory with FR-FCFS controller. It is simple and easy to add NVDLA to any other configuration and build your own FPGA image. First, read [Building Your Own Hardware Designs (FireSim FPGA Images)](http://docs.fires.im/en/1.6.0/Building-a-FireSim-AFI.html) to learn how to build a FireSim FPGA image and make sure you know the meaning and use of parameters in [`config_build_recipes.ini`](http://docs.fires.im/en/1.6.0/Advanced-Usage/Manager/Manager-Configuration-Files.html#config-build-recipes-ini).
 
 Once you know how to build a FireSim FPGA image, building your own custom configuration with NVDLA is easy. Simply, add a new build definition in `config_build_recipes.ini` and add `_WithNVDLALarge` to the end of `TARGET_CONFIG` parameter. For example, use the build definition below to build an image for a single-core processor with a network interface and a latency-bandwidth pipe memory model with the FPGA host frequency of 75MHz:
@@ -122,13 +124,18 @@ Replace `name-of-your-configuration` with the desired name for your new configur
 You can do all sort of cool things by experimenting with different configurations. For example, you can measure the performance of NVDLA with respect to the memory latency when you choose the latency-bandwidth pipe memory model. The latency of this memory model can be configured at the runtime without having to rebuild the FPGA image. In addition, the Rocket Chip SoC can be further customized by modifying the Chisel code. For example, you can change the memory bus width and see how this affects the performance of NVDLA.
 
 ## RTL Simulation (MIDAS-Level)
+
 The following steps show how to build the Verilator simulator for a Quad-core Rocket Chip with NVDLA and test it. We have provided a simple bare-metal program named `nvdla.c` to test NVDLA. To compile the program:
+
+Add `#include <stdio.h>` to `/home/nvdla/firesim-nvdla/target-design/firechip/tests/nvdla.c` file.
+
 ```
 cd firesim-nvdla/target-design/firechip/tests
 make
 ```
 
 To build the simulator and run the test program:
+
 ```
 cd firesim-nvdla/sim
 export DESIGN=FireSimNoNIC TARGET_CONFIG=FireSimRocketChipQuadCoreConfig_WithNVDLALarge \
@@ -137,6 +144,7 @@ make run-verilator-debug SIM_BINARY=../target-design/firechip/tests/nvdla.riscv 
 ```
 
 The test program configures NVDLA, triggers the process and then pools the NVDLA's interrupt status register. Once the job is finished, it prints the number of elapsed cycles:
+
 ```
 cycle1: 5969, cycle2: 10682, diff: 4713
 ```
@@ -144,9 +152,11 @@ cycle1: 5969, cycle2: 10682, diff: 4713
 The simulator saves the .out file and the waveform in `generated-src/f1/$DESIGN-$TARGET_CONFIG-$PLATFORM_CONFIG`. For more information on using the RTL simulator, please refer to [Debugging & Testing with RTL Simulation](https://docs.fires.im/en/1.6.0/Advanced-Usage/Debugging/RTL-Simulation.html#debugging-testing-with-rtl-simulation).
 
 ## Questions and Reporting Bugs
+
 If you have a question about using FireSim-NVDLA or you want to report a bug, please file an issue on this repository.
 
 ## EMC<sup>2</sup> Workshop Paper
+
 You can read our EMC<sup>2</sup> workshop paper to learn more about the integration of NVDLA into FireSim and find out how we used this platform to evaluate the perforamnce of NVDLA:
 
 Farzad Farshchi, Qijing Huang, and Heechul Yun, **"Integrating NVIDIA Deep Learning Accelerator (NVDLA) with RISC-V SoC on FireSim"**, 2nd Workshop on Energy Efficient Machine Learning and Cognitive Computing for Embedded Applications (EMC<sup>2</sup> 2019), Washington, DC, February 2019. [Paper PDF](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-paper.pdf) | [Slides](http://www.ittc.ku.edu/~farshchi/papers/nvdla-firesim-emc2-slides.pdf)
