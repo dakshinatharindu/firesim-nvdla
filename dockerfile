@@ -1,4 +1,4 @@
-# Use Ubuntu 22.04 as base image
+# Use Ubuntu 20.04 as base image
 FROM ubuntu:20.04
 
 # Set environment variables to prevent interactive prompts during package installation
